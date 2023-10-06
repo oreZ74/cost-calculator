@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import kosten_app.model.table.Product;
-import kosten_app.model.table.Table;
+import kosten_app.model.table.ProductTable;
 
 
 public class CostView {
@@ -34,7 +34,7 @@ public class CostView {
     private Scene scene = null;
     private Scene secondScene = null;
     Stage stage = null;
-    Table table = new Table();
+    ProductTable table = new ProductTable();
 
     //-------Ende Attribute der grafischen Oberflaeche-------
 

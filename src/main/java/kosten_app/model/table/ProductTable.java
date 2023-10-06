@@ -4,7 +4,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class Table {
+public class ProductTable {
     private TableView <Product> table = new TableView<>();
 
 
@@ -14,7 +14,7 @@ public class Table {
     TableColumn<Product, String> price_column = new TableColumn<>("Price");
 
 
-    public Table(){
+    public ProductTable(){
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
         revenue_column.setCellValueFactory(new PropertyValueFactory<>("revenue"));
         outgoings_column.setCellValueFactory(new PropertyValueFactory<>("outgoings"));
