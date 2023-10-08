@@ -4,6 +4,12 @@ public class ReciptModel {
     String name;
     double price;
 
+
+    public ReciptModel(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
@@ -19,6 +25,4 @@ public class ReciptModel {
     public void setPrice(double price) {
         this.price = price;
     }
-
-
 }

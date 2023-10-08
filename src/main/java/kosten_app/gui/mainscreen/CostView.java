@@ -3,18 +3,20 @@ package kosten_app.gui.mainscreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import kosten_app.model.CostModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import kosten_app.model.table.Product;
 import kosten_app.model.table.ProductTable;
@@ -35,6 +37,9 @@ public class CostView {
     private Scene secondScene = null;
     Stage stage = null;
     ProductTable table = new ProductTable();
+    //VBox root = new VBox(new ScrollPane(table.getTable()));
+    VBox root = new VBox(table.getTable());
+    ScrollPane s1 = new ScrollPane();
 
     //-------Ende Attribute der grafischen Oberflaeche-------
 
@@ -43,6 +48,11 @@ public class CostView {
 
     public CostView(CostController control, Stage stage, CostModel model) {
 
+
+
+
+        s1.setPrefSize(300,400);
+        s1.setContent(root);
         this.control = control;
         this.model = model;
         this.stage = stage;
@@ -56,7 +66,7 @@ public class CostView {
         scene = new Scene(pane,900, 600);
         //scene.getStylesheets().add(this.getClass().getResource("kosten_app/gui/mainscreen/style.css").toExternalForm());
         String css = this.getClass().getResource("/kosten_app/style.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        scene.getStylesheets().addAll(css);
         stage.setScene(scene);
         stage.setTitle("Monatliche Kostenberechnung");
         stage.setResizable(false);
@@ -84,7 +94,7 @@ public class CostView {
 
         // Table
         table.getTable().getColumns().addAll(table.getName_column(), table.getRevenue_column(), table.getOutgoings_column(), table.getPrice_column());
-        grid.add(table.getTable(),0,5);
+        grid.add(s1,0,5);
         table.getTable().setItems(getProducts());
         //table.getTable().setItems(table.getTable().getListe());
 
@@ -113,10 +123,7 @@ public class CostView {
 
     public ObservableList<Product> getProducts(){
         ObservableList<Product> liste = FXCollections.observableArrayList();
-        liste.add(new Product("Käse", 400, 500, "" + 100 + "€"));
-        liste.add(new Product("Affe", 500, 600, "" + 200 + "€"));
-        liste.add(new Product("Waffe", 600, 700, "" + 300 + "€"));
-        liste.add(new Product("Ak-74", 700, 800, "" + 400 + "€"));
+        liste.add(new Product("Käse",  "400", "500", "" + "100" + "€"));
         return liste;
     }
 

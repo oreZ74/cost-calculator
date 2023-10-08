@@ -1,49 +1,59 @@
 package kosten_app.model.table;
 
+
+import javafx.beans.property.SimpleStringProperty;
+
 public class Product {
 
-    private String name;
-    private double revenue;
-    private double outgoings;
-    private String price;
+    private SimpleStringProperty name;
+    private SimpleStringProperty revenue;
+    private SimpleStringProperty outgoings;
+    private SimpleStringProperty price;
 
-    public Product(String name, double revenue, double outgoings, String price) {
-        this.name = name;
-        this.revenue = revenue;
-        this.outgoings = outgoings;
-        this.price = price;
+    public Product(String name, String revenue, String outgoings, String price) {
+        this.name  = new SimpleStringProperty();
+        this.revenue = new SimpleStringProperty();
+        this.outgoings = new SimpleStringProperty();
+        this.price = new SimpleStringProperty();
+
+        setName(name);
+        setRevenue(revenue);
+        setOutgoings(outgoings);
+        setPrice(price);
     }
-
 
     public String getName() {
+        return name.get();
+    }
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public SimpleStringProperty nameProperty() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getRevenue() {
+        return revenue.get();
     }
-
-    public double getRevenue() {
-        return revenue;
+    public void setRevenue(String revenue) {
+        this.revenue.set(revenue);
     }
+    public SimpleStringProperty revenueProperty() { return revenue;}
 
-    public void setRevenue(double revenue) {
-        this.revenue = revenue;
+    public String getOutgoings() {
+        return outgoings.get();
     }
-
-    public double getOutgoings() {
-        return outgoings;
+    public void setOutgoings(String outgoings) {
+        this.outgoings.set(outgoings);
     }
-
-    public void setOutgoings(double outgoings) {
-        this.outgoings = outgoings;
-    }
+    public SimpleStringProperty outgoingsProperty() { return outgoings;}
 
     public String getPrice() {
-        return price;
+        return price.get();
     }
-
     public void setPrice(String price) {
-        this.price = price;
+        this.price.set(price);
     }
+    public SimpleStringProperty priceProperty() { return price;}
+
 }
