@@ -65,8 +65,9 @@ public class CostView {
     void setStage(Stage stage, Pane pane){
         scene = new Scene(pane,900, 600);
         //scene.getStylesheets().add(this.getClass().getResource("kosten_app/gui/mainscreen/style.css").toExternalForm());
-        String css = this.getClass().getResource("/kosten_app/style.css").toExternalForm();
-        scene.getStylesheets().addAll(css);
+        //String css = this.getClass().getResource("/kosten_app/style.css").toExternalForm();
+        //String background = this.getClass().getResource("/kosten_app/background.css").toExternalForm();
+        scene.getStylesheets().addAll();
         stage.setScene(scene);
         stage.setTitle("Monatliche Kostenberechnung");
         stage.setResizable(false);
