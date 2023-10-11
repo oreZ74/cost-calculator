@@ -1,11 +1,12 @@
 /* Stilvoller grüner Hintergrund */
 .root {
-    -fx-background-color: #E0FFFF; /* Grüne Hintergrundfarbe */
+    -fx-background-color: #E0FFFF; /* #E0FFFF Hintergrundfarbe */
     -fx-background-radius: 10; /* Runde Ecken */
     -fx-padding: 20px; /* Innenabstand */
     -fx-font-size: 16px; /* Schriftgröße für den Text */
     -fx-text-fill: white; /* Textfarbe */
 }
+
 
 /* Optional: Hervorhebung für Buttons */
 .button {

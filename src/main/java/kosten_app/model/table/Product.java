@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Product {
 
-    private SimpleStringProperty name;
-    private SimpleStringProperty revenue;
-    private SimpleStringProperty outgoings;
-    private SimpleStringProperty price;
+    private SimpleStringProperty name = new SimpleStringProperty();;
+    private SimpleStringProperty revenue = new SimpleStringProperty();;
+    private SimpleStringProperty outgoings = new SimpleStringProperty();;
+    private SimpleStringProperty price = new SimpleStringProperty();;
 
     public Product(String name, String revenue, String outgoings, String price) {
         this.name  = new SimpleStringProperty();
