@@ -20,8 +20,12 @@ import kosten_app.model.table.Product;
 import kosten_app.model.table.ProductTable;
 import kosten_app.model.table.bill.Bill;
 import kosten_app.model.table.bill.BillTable;
+import kosten_app.model.table.debt.Debt;
+import kosten_app.model.table.debt.DebtTable;
 import kosten_app.model.table.expense.Expense;
 import kosten_app.model.table.expense.ExpenseTable;
+import kosten_app.model.table.saving.Saving;
+import kosten_app.model.table.saving.SavingTable;
 
 
 public class CostView {
@@ -33,9 +37,12 @@ public class CostView {
     Stage stage = null;
     ProductTable table = new ProductTable();
     BillTable billTable = new BillTable();
+    DebtTable debtTable = new DebtTable();
+    SavingTable savingTable = new SavingTable();
     ExpenseTable expenseTable = new ExpenseTable();
     //VBox root = new VBox(new ScrollPane(table.getTable()));
-    HBox root = new HBox(table.getTable(), billTable.getTable(), expenseTable.getTable());
+    VBox vBox = new VBox(debtTable.getTable(), savingTable.getTable());
+    HBox root = new HBox(billTable.getTable(), expenseTable.getTable(),vBox);
 
     HBox hBox = new HBox();
     ScrollPane s1 = new ScrollPane();
@@ -50,7 +57,7 @@ public class CostView {
 
 
 
-        //s1.setPrefSize(300,400);
+        vBox.setPrefSize(300,400);
         s1.setContent(root);
         this.control = control;
         this.model = model;
@@ -77,17 +84,20 @@ public class CostView {
         root.setSpacing(20);
 
         // Table
-        table.getTable().getColumns().addAll(table.getName_column(), table.getRevenue_column(), table.getOutgoings_column(), table.getPrice_column());
         billTable.getTable().getColumns().addAll(billTable.getName_column(), billTable.getDue_column(), billTable.getBudget_column(), billTable.getActual_column(), billTable.getDifference_column());
         expenseTable.getTable().getColumns().addAll(expenseTable.getName_column(), expenseTable.getBudget_column(), expenseTable.getActual_column(), expenseTable.getDifference_column());
+        savingTable.getTable().getColumns().addAll(savingTable.getName_column(), savingTable.getBudget_column(), savingTable.getActual_column(), savingTable.getDifference_column());
+        debtTable.getTable().getColumns().addAll(debtTable.getName_column(), debtTable.getBudget_column(), debtTable.getActual_column(), debtTable.getDifference_column());
+
+
         //grid.add(s1,0,5);
-        table.getTable().setItems(getProducts());
         billTable.getTable().setItems(getBill());
         expenseTable.getTable().setItems(getExpense());
+        savingTable.getTable().setItems(getSaving());
+        debtTable.getTable().setItems(getDebt());
 
         hBox.getChildren().addAll(s1);
         //table.getTable().setItems(table.getTable().getListe());
-
         // Styling
         //inline code
         //ocrButton.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
@@ -97,12 +107,6 @@ public class CostView {
     private void initListener(){
 
 
-    }
-
-    public ObservableList<Product> getProducts(){
-        ObservableList<Product> liste = FXCollections.observableArrayList();
-        liste.add(new Product("Käse",  "400", "500", "100" + "€"));
-        return liste;
     }
     public ObservableList<Bill> getBill(){
         ObservableList<Bill> liste = FXCollections.observableArrayList();
@@ -114,4 +118,17 @@ public class CostView {
         liste.add(new Expense("Miete", "150€", "120", "30" ));
         return liste;
     }
+    public ObservableList<Saving> getSaving(){
+        ObservableList<Saving> liste = FXCollections.observableArrayList();
+        liste.add(new Saving("Miete", "150€", "120", "30" ));
+        return liste;
+    }
+    public ObservableList<Debt> getDebt(){
+        ObservableList<Debt> liste = FXCollections.observableArrayList();
+        liste.add(new Debt("Miete", "150€", "120", "30" ));
+        return liste;
+    }
+
+
+
 }
