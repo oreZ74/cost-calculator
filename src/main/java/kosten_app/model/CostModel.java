@@ -1,5 +1,9 @@
 package kosten_app.model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 // Das com.example.kostenkalkulation.Model speichert die Daten und führt Berechnungen durch
 // Das Model speichert die Daten und führt Berechnungen durch
 public class CostModel {
@@ -24,5 +28,19 @@ public class CostModel {
 
     public void setFixedExpenses(double fixedExpenses) {
         this.fixedExpenses = fixedExpenses;
+    }
+
+
+    public void writeToCsv()
+    {
+        BufferedWriter aus;
+        try {
+            aus = new BufferedWriter(
+                    new FileWriter("Debt.csv", true));
+            aus.write(this.getBad().gibFreizeitbadZurueck(';'));
+            aus.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

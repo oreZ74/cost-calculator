@@ -1,10 +1,13 @@
 /* Stilvoller grüner Hintergrund */
+
+
+
 .root {
     -fx-background-color: #E0FFFF; /* #E0FFFF Hintergrundfarbe */
     -fx-background-radius: 10; /* Runde Ecken */
     -fx-padding: 20px; /* Innenabstand */
     -fx-font-size: 16px; /* Schriftgröße für den Text */
-    -fx-text-fill: white; /* Textfarbe */
+    -fx-text-fill: black; /* Textfarbe */
 }
 
 
@@ -28,3 +31,11 @@
     -fx-background-radius: 5; /* Runde Ecken für Textfelder */
     -fx-font-size: 14px; /* Schriftgröße für Textfelder */
 }
+/*
+.background {
+    -fx-background-color:  black;
+}
+.hBox {
+    -fx-background-color:  black;
+}
+*/
