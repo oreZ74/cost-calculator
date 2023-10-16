@@ -1,8 +1,11 @@
 package kosten_app.model.table.bill;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 public class BillTable {
     private TableView <Bill> table = new TableView<>();
@@ -45,6 +48,7 @@ public class BillTable {
                 bill.setDifference(event.getNewValue());
             }
         });
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public TableView<Bill> getTable() {

@@ -3,6 +3,10 @@ package kosten_app.gui.mainscreen;
 
 import javafx.stage.Stage;
 import kosten_app.model.CostModel;
+import kosten_app.model.table.bill.Bill;
+import kosten_app.model.table.debt.Debt;
+import kosten_app.model.table.expense.Expense;
+import kosten_app.model.table.saving.Saving;
 
 // Der Controller behandelt Benutzereingaben und aktualisiert das Model und die View
 public class CostController {
@@ -15,46 +19,47 @@ public class CostController {
         this.view = new CostView(this, stage, model);
     }
 
-
-    public void nehmeFreizeitbadAuf(){
+    public void extractData(){
         try{
-            this.model.setBad(new Freizeitbad(
-                    view.getTxtName().getText(),
-                    view.getTxtGeoeffnetVon().getText(),
-                    view.getTxtGeoeffnetBis().getText(),
-                    view.getTxtBeckenlaenge().getText(),
-                    view.getTxtWassTemperatur().getText()));
-
-            view.zeigeInformationsfensterAn("Das Freizeitbad wurde aufgenommen!");
-        }
-        catch(PlausiException exc){
-            view.zeigeFehlermeldungsfensterAn(exc.getPlausiTyp() + "er ", exc.getMessage());
-        }
-    }
-
-    public void zeigeFreizeitbaederAn(){
-        if(this.model.getBad() != null){
-            view.getTxtAnzeige().setText(this.model.getBad().gibFreizeitbadZurueck(' '));
-        }
-        else{
-            view.zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
-        }
-    }
-
-
-    void schreibeFreizeitbaederInDatei(String typ){
-        try{
-            if("csv".equals(typ)){
-                model.schreibeFreizeitbaederInCsvDatei();
+            for (var i : view.billList) {
+                this.model.addBill(new Bill(
+                        i.getName(),
+                        i.getDue(),
+                        i.getBudget(),
+                        i.getActual(),
+                        i.getDifference()
+                ));
             }
-            else{
-                view.zeigeInformationsfensterAn(
-                        "Noch nicht implementiert!");
+            for (var i : CostView.debtList) {
+                model.addDebt(new Debt(
+                        i.getName(),
+                        i.getBudget(),
+                        i.getActual(),
+                        i.getDifference()
+                ));
             }
+            for (var i : CostView.expenseList) {
+                model.addExpense(new Expense(
+                        i.getName(),
+                        i.getBudget(),
+                        i.getActual(),
+                        i.getDifference()
+                ));
+            }
+            for (var i : CostView.savingList) {
+                model.addSaving(new Saving(
+                        i.getName(),
+                        i.getBudget(),
+                        i.getActual(),
+                        i.getDifference()
+                ));
+            }
+            model.writeToCsv();
+            view.showInformationWindow("Your data has been saved!");
         }
-        catch(Exception exc){
-            view.zeigeFehlermeldungsfensterAn(
-                    "Unbekannter Fehler beim Speichern!", "Fehler");
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
+
 }

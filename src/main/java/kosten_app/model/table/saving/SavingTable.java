@@ -40,6 +40,8 @@ public class SavingTable {
                 expense.setDifference(event.getNewValue());
             }
         });
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setCenterShape(false);
     }
 
     public TableView<Saving> getTable() {

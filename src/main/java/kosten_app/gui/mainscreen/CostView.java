@@ -2,6 +2,8 @@ package kosten_app.gui.mainscreen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -24,8 +26,8 @@ import kosten_app.model.table.expense.Expense;
 import kosten_app.model.table.expense.ExpenseTable;
 import kosten_app.model.table.saving.Saving;
 import kosten_app.model.table.saving.SavingTable;
-
-
+import javafx.scene.control.Alert.AlertType;
+import kosten_app.ownUtil.ShowMessageWindow;
 
 
 public class CostView {
@@ -33,83 +35,93 @@ public class CostView {
     private Scene scene = null;
     Stage stage = null;
 
+    // Liste //
+    public ObservableList <Bill> billList;
+    public static ObservableList <Debt> debtList;
+    public static ObservableList <Expense> expenseList;
+    public static ObservableList <Saving> savingList;
+
     // private final Scene secondScene = null;
 
+    // Button //
+    private Button btnSaveInput	         	    = new Button("Save");
+
     // Tables //
-    BillTable billTable = new BillTable();
-    DebtTable debtTable = new DebtTable();
-    SavingTable savingTable = new SavingTable();
-    ExpenseTable expenseTable = new ExpenseTable();
+    private BillTable billTable                 = new BillTable();
+    private DebtTable debtTable                 = new DebtTable();
+    private SavingTable savingTable             = new SavingTable();
+    private ExpenseTable expenseTable           = new ExpenseTable();
 
     // Shapes //
-    Rectangle card1 = new Rectangle(20,20,300,150);
-    Rectangle card2 = new Rectangle(20,20,300,150);
-    Rectangle card3 = new Rectangle(20,20,300,150);
-    Rectangle card4 = new Rectangle(20,20,300,150);
-    Rectangle cardBackground1 = new Rectangle(20,20,300,153);
-    Rectangle cardBackground2 = new Rectangle(20,20,300,153);
-    Rectangle cardBackground3 = new Rectangle(20,20,300,153);
-    Rectangle cardBackground4 = new Rectangle(20,20,300,153);
+    private Rectangle card1                     = new Rectangle(20,20,300,150);
+    private Rectangle card2                     = new Rectangle(20,20,300,150);
+    private Rectangle card3                     = new Rectangle(20,20,300,150);
+    private Rectangle card4                     = new Rectangle(20,20,300,150);
+    private Rectangle cardBackground1           = new Rectangle(20,20,300,153);
+    private Rectangle cardBackground2           = new Rectangle(20,20,300,153);
+    private Rectangle cardBackground3           = new Rectangle(20,20,300,153);
+    private Rectangle cardBackground4           = new Rectangle(20,20,300,153);
 
-    Rectangle billTableTop = new Rectangle(0,0,400,15);
-    Rectangle expenseTableTop = new Rectangle(0,0,400,15);
-    Rectangle savingTableTop = new Rectangle(0,0,500,15);
-    Rectangle debtTableTop = new Rectangle(0,0,500,15);
+    private Rectangle billTableTop              = new Rectangle(0,0,400,15);
+    private Rectangle expenseTableTop           = new Rectangle(0,0,400,15);
+    private Rectangle savingTableTop            = new Rectangle(0,0,500,15);
+    private Rectangle debtTableTop              = new Rectangle(0,0,500,15);
 
-    Rectangle billTableBot = new Rectangle(0,0,400,15);
-    Rectangle expenseTableBot = new Rectangle(0,0,400,15);
-    Rectangle savingTableBot = new Rectangle(0,0,500,15);
-    Rectangle debtTableBot = new Rectangle(0,0,500,15);
+    private Rectangle billTableBot              = new Rectangle(0,0,400,15);
+    private Rectangle expenseTableBot           = new Rectangle(0,0,400,15);
+    private Rectangle savingTableBot            = new Rectangle(0,0,500,15);
+    private Rectangle debtTableBot              = new Rectangle(0,0,500,15);
 
-    Text cardTextSpend = new Text("LEFT TO SPEND");
-    Text cardTextIncome = new Text("TOTAL INCOME");
-    Text cardTextExpenses = new Text("TOTAL EXPENSES");
-    Text cardTextBudget = new Text("LEFT TO BUDGET");
+    private Text cardTextSpend                  = new Text("LEFT TO SPEND");
+    private Text cardTextIncome                 = new Text("TOTAL INCOME");
+    private Text cardTextExpenses               = new Text("TOTAL EXPENSES");
+    private Text cardTextBudget                 = new Text("LEFT TO BUDGET");
 
-    Text cardValueSpend = new Text("10000" + "€");
-    Text cardValueIncome = new Text("400000" + "€");
-    Text cardValueExpenses = new Text("5000" + "€");
-    Text cardValueBudget = new Text("200000000" + "€");
+    private Text cardValueSpend                 = new Text("10000" + "€");
+    private Text cardValueIncome                = new Text("400000" + "€");
+    private Text cardValueExpenses              = new Text("5000" + "€");
+    private Text cardValueBudget                = new Text("200000000" + "€");
 
-    VBox cardOrder1 = new VBox(cardTextSpend, cardValueSpend);
-    VBox cardOrder2= new VBox(cardTextIncome, cardValueIncome);
-    VBox cardOrder3 = new VBox(cardTextExpenses, cardValueExpenses);
-    VBox cardOrder4 = new VBox(cardTextBudget, cardValueBudget);
+    private VBox cardOrder1                     = new VBox(cardTextSpend, cardValueSpend);
+    private VBox cardOrder2                     = new VBox(cardTextIncome, cardValueIncome);
+    private VBox cardOrder3                     = new VBox(cardTextExpenses, cardValueExpenses);
+    private VBox cardOrder4                     = new VBox(cardTextBudget, cardValueBudget);
+
     // Charts //
-    ObservableList<PieChart.Data> pieChartData =
+    private ObservableList<PieChart.Data> pieChartData =
             FXCollections.observableArrayList(
                     new PieChart.Data("Grapefruit", 13),
                     new PieChart.Data("Oranges", 25),
                     new PieChart.Data("Plums", 10),
                     new PieChart.Data("Pears", 22),
                     new PieChart.Data("Apples", 30));
-    final PieChart chart = new PieChart(pieChartData);
+    private final PieChart chart = new PieChart(pieChartData);
 
 
 
     // Pane layouts //
-    StackPane stpCardSpend = new StackPane();
-    StackPane stpCardIncome = new StackPane();
-    StackPane stpCardExpense = new StackPane();
-    StackPane stpCardDebt = new StackPane();
+    private StackPane stpCardSpend = new StackPane();
+    private StackPane stpCardIncome = new StackPane();
+    private StackPane stpCardExpense = new StackPane();
+    private StackPane stpCardDebt = new StackPane();
 
-    StackPane stpTableBillTop = new StackPane(billTableTop,new Text("BILLS"));
-    StackPane stpTableExpenseTop = new StackPane(expenseTableTop,new Text("EXPENSES"));
-    StackPane stpTableSavingTop = new StackPane(savingTableTop, new Text("SAVINGS"));
-    StackPane stpTableDebtTop = new StackPane(debtTableTop, new Text("DEBT"));
+    private StackPane stpTableBillTop = new StackPane(billTableTop,new Text("BILLS"));
+    private StackPane stpTableExpenseTop = new StackPane(expenseTableTop,new Text("EXPENSES"));
+    private StackPane stpTableSavingTop = new StackPane(savingTableTop, new Text("SAVINGS"));
+    private StackPane stpTableDebtTop = new StackPane(debtTableTop, new Text("DEBT"));
 
-    StackPane stpTableBillBot = new StackPane(billTableBot, new Text("hallo"));
-    StackPane stpTableExpenseBot = new StackPane(expenseTableBot, new Text("hallo"));
-    StackPane stpTableSavingBot = new StackPane(savingTableBot, new Text("hallo"));
-    StackPane stpTableDebtBot = new StackPane(debtTableBot, new Text("hallo"));
+    private StackPane stpTableBillBot = new StackPane(billTableBot, new Text("hallo"));
+    private StackPane stpTableExpenseBot = new StackPane(expenseTableBot, new Text("hallo"));
+    private StackPane stpTableSavingBot = new StackPane(savingTableBot, new Text("hallo"));
+    private StackPane stpTableDebtBot = new StackPane(debtTableBot, new Text("hallo"));
 
-    Group chartOrder = new Group();
-    VBox vTableBottom = new VBox(new VBox(stpTableDebtTop,debtTable.getTable(),stpTableDebtBot), new VBox(stpTableSavingTop,savingTable.getTable(),stpTableSavingBot));
-    HBox hTableBottom = new HBox(new VBox(stpTableBillTop,billTable.getTable(),stpTableBillBot), new VBox(stpTableExpenseTop, expenseTable.getTable(),stpTableExpenseBot), vTableBottom);
-    HBox tableOrder = new HBox();
-    HBox cardOrder = new HBox(stpCardSpend, stpCardIncome, stpCardExpense, stpCardDebt, chartOrder);
-    VBox compOrder = new VBox(cardOrder, tableOrder);
-    ScrollPane s1 = new ScrollPane();
+    private Group chartOrder = new Group();
+    private VBox vTableBottom = new VBox(new VBox(stpTableDebtTop,debtTable.getTable(),stpTableDebtBot), new VBox(stpTableSavingTop,savingTable.getTable(),stpTableSavingBot));
+    private HBox hTableBottom = new HBox(new VBox(stpTableBillTop,billTable.getTable(),stpTableBillBot), new VBox(stpTableExpenseTop, expenseTable.getTable(),stpTableExpenseBot), vTableBottom);
+    private HBox tableOrder = new HBox();
+    private HBox cardOrder = new HBox(stpCardSpend, stpCardIncome, stpCardExpense, stpCardDebt, chartOrder);
+    private VBox compOrder = new VBox(cardOrder, tableOrder, btnSaveInput);
+    private ScrollPane s1 = new ScrollPane();
 
     //-------End attributes of the GUI-------//
 
@@ -118,12 +130,9 @@ public class CostView {
     private final CostController control;
     private final CostModel model;
 
-
-
-
-
     public CostView(CostController control, Stage stage, CostModel model) {
         vTableBottom.setPrefSize(500,600);
+
         s1.setContent(hTableBottom);
         this.control = control;
         this.model = model;
@@ -251,20 +260,48 @@ public class CostView {
         //inline code
         //ocrButton.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 
+        TableView.TableViewSelectionModel <Bill> selectionModel = billTable.getTable().getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+
+        Thread t = new Thread(() -> {
+            while(true) {
+                for (var i : billList) {
+
+                    System.out.println(i.getName());
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            /*Platform.runLater(() -> {
+                //Here the actions that use the gui where is finished the actions on background.
+            });*/
+        });
+        t.start();
     }
 
     private void initListener(){
 
-
+        btnSaveInput.setOnAction((ActionEvent e)->
+        {
+            control.extractData();
+        });
     }
+
+
+
     public ObservableList<Bill> getBill(){
-        ObservableList<Bill> liste = FXCollections.observableArrayList();
-        liste.add(new Bill("Miete", "30.02", "150€", "120", "30" ));
-        return liste;
+        if(billList == null) {
+            billList = FXCollections.observableArrayList();
+            billList.add(new Bill("Miete", "30.02", "150€", "120", "30"));
+        }
+        return billList;
     }
     public ObservableList<Expense> getExpense(){
         ObservableList<Expense> liste = FXCollections.observableArrayList();
-        liste.add(new Expense("Miete", "150€", "120", "30" ));
+        liste.add(new Expense("", "", "", "" ));
         return liste;
     }
     public ObservableList<Saving> getSaving(){
@@ -277,7 +314,10 @@ public class CostView {
         liste.add(new Debt("Miete", "150€", "120", "30" ));
         return liste;
     }
-
+    public void showInformationWindow(String report){
+        new ShowMessageWindow(AlertType.INFORMATION,
+                "Information", report).zeigeMeldungsfensterAn();
+    }
 
 
 }

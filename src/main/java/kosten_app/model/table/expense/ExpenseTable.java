@@ -40,6 +40,7 @@ public class ExpenseTable {
                 expense.setDifference(event.getNewValue());
             }
         });
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public TableView<Expense> getTable() {

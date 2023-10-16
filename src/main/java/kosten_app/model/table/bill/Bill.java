@@ -80,4 +80,14 @@ public class Bill {
     public void setDifference(String difference) {
         this.difference.set(difference);
     }
+
+    public String getBillBack(char separator){
+        return this.getName() + separator
+                + this.getDue() + separator
+                + this.getBudget()+ separator
+                + this.getActual() + separator
+                + this.getDifference();
+    }
+
+
 }
