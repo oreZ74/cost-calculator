@@ -78,31 +78,22 @@ public class CostModel {
         BufferedWriter aus;
         try {
             aus = new BufferedWriter(
-                    new FileWriter("Debt.csv", true));
+                    new FileWriter("SaveFile.csv", false));
             for (Bill i : this.getListBill()){
                 aus.write(i.getBillBack(';'));
+            }
+            for (Debt i : this.getListDebt()){
+                aus.write(i.getDebtBack(';'));
+            }
+            for (Expense i : this.getListExpense()){
+                aus.write(i.getExpenseBack(';'));
+            }
+            for (Saving i : this.getListSaving()){
+                aus.write(i.getSavingBack(';'));
             }
             aus.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
-//
-//
-//    public void schreibeFreizeitbaederInCsvDatei() throws Exception
-//    {
-//        //BufferedWriter aus = new BufferedWriter(new FileWriter("Freizeitbaeder.csv", true));
-//        //aus.write(getBad().gibFreizeitbadZurueck(';'));
-//        //aus.close();
-//        ConcreteCSVProductCreator creator = new ConcreteCSVProductCreator();
-//        var product = creator.factoryMethod();
-//
-//        // foreach
-//        for(var bad : getBaeder())
-//            product.fuegeInDateiHinzu(bad);
-//        product.schliesseDatei();
-//    }
 }

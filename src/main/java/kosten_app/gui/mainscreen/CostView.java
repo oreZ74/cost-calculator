@@ -37,9 +37,9 @@ public class CostView {
 
     // Liste //
     public ObservableList <Bill> billList;
-    public static ObservableList <Debt> debtList;
-    public static ObservableList <Expense> expenseList;
-    public static ObservableList <Saving> savingList;
+    public ObservableList <Debt> debtList;
+    public ObservableList <Expense> expenseList;
+    public ObservableList <Saving> savingList;
 
     // private final Scene secondScene = null;
 
@@ -161,6 +161,7 @@ public class CostView {
     private void initKomponenten(){
         hTableBottom.setSpacing(20);
 
+
         // Table
         billTable.getTable().getColumns().addAll(billTable.getName_column(), billTable.getDue_column(), billTable.getBudget_column(), billTable.getActual_column(), billTable.getDifference_column());
         expenseTable.getTable().getColumns().addAll(expenseTable.getName_column(), expenseTable.getBudget_column(), expenseTable.getActual_column(), expenseTable.getDifference_column());
@@ -263,23 +264,23 @@ public class CostView {
         TableView.TableViewSelectionModel <Bill> selectionModel = billTable.getTable().getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
 
-        Thread t = new Thread(() -> {
-            while(true) {
-                for (var i : billList) {
-
-                    System.out.println(i.getName());
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            /*Platform.runLater(() -> {
-                //Here the actions that use the gui where is finished the actions on background.
-            });*/
-        });
-        t.start();
+//        Thread t = new Thread(() -> {
+//            while(true) {
+//                for (var i : billList) {
+//
+//                    System.out.println(i.getName());
+//                    try {
+//                        Thread.sleep(10000);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//            /*Platform.runLater(() -> {
+//                //Here the actions that use the gui where is finished the actions on background.
+//            });*/
+//        });
+//        t.start();
     }
 
     private void initListener(){
@@ -295,25 +296,56 @@ public class CostView {
     public ObservableList<Bill> getBill(){
         if(billList == null) {
             billList = FXCollections.observableArrayList();
-            billList.add(new Bill("Miete", "30.02", "150€", "120", "30"));
+            billList.add(new Bill("Bill", "30.02", "150€", "120", "30"));
+
+//            int i = 0;
+//            while(true){
+//                if( billList.get(i).getName() != null){
+//                    billList.add(new Bill("", "", "", "", ""));
+//                }
+//                i++;
+//            }
+
         }
+
+            int i = 0;
+            while(billList.get(i).getName() != null){
+
+                    billList.add(new Bill("", "", "", "", ""));
+                }
+
+
+
+
+//        if(billList.get(0).getName() != null) {
+//            billList.add(new Bill("", "", "", "", ""));
+//
+//        }
         return billList;
     }
+
+    public ObservableList<Debt> getDebt(){
+        if (debtList == null) {
+            debtList = FXCollections.observableArrayList();
+            debtList.add(new Debt("Debt", "150€", "120", "30"));
+        }
+        return debtList;
+    }
     public ObservableList<Expense> getExpense(){
-        ObservableList<Expense> liste = FXCollections.observableArrayList();
-        liste.add(new Expense("", "", "", "" ));
-        return liste;
+        if (expenseList == null){
+            expenseList = FXCollections.observableArrayList();
+            expenseList.add(new Expense("Expense", "1000", "0", "1000" ));
+        }
+        return expenseList;
     }
     public ObservableList<Saving> getSaving(){
-        ObservableList<Saving> liste = FXCollections.observableArrayList();
-        liste.add(new Saving("Miete", "150€", "120", "30" ));
-        return liste;
+        if (savingList == null) {
+            savingList = FXCollections.observableArrayList();
+            savingList.add(new Saving("Saving", "150€", "120", "30"));
+        }
+        return savingList;
     }
-    public ObservableList<Debt> getDebt(){
-        ObservableList<Debt> liste = FXCollections.observableArrayList();
-        liste.add(new Debt("Miete", "150€", "120", "30" ));
-        return liste;
-    }
+
     public void showInformationWindow(String report){
         new ShowMessageWindow(AlertType.INFORMATION,
                 "Information", report).zeigeMeldungsfensterAn();

@@ -13,7 +13,6 @@ public class CostController {
     private CostView view = null;
     private CostModel model = null;
 
-
     public CostController(Stage stage) {
         this.model = new CostModel();
         this.view = new CostView(this, stage, model);
@@ -30,24 +29,24 @@ public class CostController {
                         i.getDifference()
                 ));
             }
-            for (var i : CostView.debtList) {
-                model.addDebt(new Debt(
+            for (var i : view.debtList) {
+                this.model.addDebt(new Debt(
                         i.getName(),
                         i.getBudget(),
                         i.getActual(),
                         i.getDifference()
                 ));
             }
-            for (var i : CostView.expenseList) {
-                model.addExpense(new Expense(
+            for (var i : view.expenseList) {
+                this.model.addExpense(new Expense(
                         i.getName(),
                         i.getBudget(),
                         i.getActual(),
                         i.getDifference()
                 ));
             }
-            for (var i : CostView.savingList) {
-                model.addSaving(new Saving(
+            for (var i : view.savingList) {
+                this.model.addSaving(new Saving(
                         i.getName(),
                         i.getBudget(),
                         i.getActual(),
@@ -60,6 +59,9 @@ public class CostController {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    public void addNewLine (){
+
     }
 
 }

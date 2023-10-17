@@ -67,7 +67,7 @@ public class Saving {
         this.difference.set(difference);
     }
 
-    public String getBillBack(char separator){
+    public String getSavingBack(char separator){
         return this.getName() + separator
                 + this.getBudget()+ separator
                 + this.getActual() + separator

@@ -67,7 +67,7 @@ public class Expense {
         this.difference.set(difference);
     }
 
-    public String getBillBack(char separator){
+    public String getExpenseBack(char separator){
         return this.getName() + separator
                 + this.getBudget()+ separator
                 + this.getActual() + separator
