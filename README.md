@@ -1,2 +1,2 @@
-# Kostenkalkulation
+# cost-calculator
  First project
