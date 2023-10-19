@@ -23,7 +23,7 @@ public class BillTable {
         due_column.setCellValueFactory(cellData -> cellData.getValue().dueProperty());
         budget_column.setCellValueFactory(cellData -> cellData.getValue().budgetProperty());
         actual_column.setCellValueFactory(cellData -> cellData.getValue().actualProperty());
-        difference_column.setCellValueFactory(cellData -> cellData.getValue().actualProperty());
+        difference_column.setCellValueFactory(cellData -> cellData.getValue().differenceProperty());
 
 
         name_column.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -33,6 +33,7 @@ public class BillTable {
         difference_column.setCellFactory(TextFieldTableCell.forTableColumn());
 
         table.setEditable(true);
+        difference_column.setEditable(false);
 
         name_column.setOnEditCommit(event -> {
             Bill bill = event.getRowValue();

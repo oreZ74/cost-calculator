@@ -18,7 +18,7 @@ public class ExpenseTable {
         name_column.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         budget_column.setCellValueFactory(cellData -> cellData.getValue().budgetProperty());
         actual_column.setCellValueFactory(cellData -> cellData.getValue().actualProperty());
-        difference_column.setCellValueFactory(cellData -> cellData.getValue().actualProperty());
+        difference_column.setCellValueFactory(cellData -> cellData.getValue().differenceProperty());
 
 
         name_column.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -27,6 +27,7 @@ public class ExpenseTable {
         difference_column.setCellFactory(TextFieldTableCell.forTableColumn());
 
         table.setEditable(true);
+        difference_column.setEditable(false);
 
         name_column.setOnEditCommit(event -> {
             Expense expense = event.getRowValue();

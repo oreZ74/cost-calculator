@@ -3,6 +3,7 @@ package kosten_app.model;
 import kosten_app.model.table.bill.Bill;
 import kosten_app.model.table.debt.Debt;
 import kosten_app.model.table.expense.Expense;
+import kosten_app.model.table.income.Income;
 import kosten_app.model.table.saving.Saving;
 
 import java.io.BufferedWriter;
@@ -19,6 +20,7 @@ public class CostModel {
     private ArrayList <Debt> listDebt= new ArrayList<>();
     private ArrayList <Expense> listExpense= new ArrayList<>();
     private ArrayList <Saving> listSaving= new ArrayList<>();
+    private ArrayList <Income> listIncome= new ArrayList<>();
 
 
     public CostModel() {
@@ -67,10 +69,21 @@ public class CostModel {
         this.listSaving = listSaving;
     }
 
-
     public void addSaving(Saving saving){
         listSaving.add(saving);
 
+    }
+
+    public ArrayList<Income> getListIncome() {
+        return listIncome;
+    }
+
+    public void setListIncome(ArrayList<Income> listIncome) {
+        this.listIncome = listIncome;
+    }
+
+    public  void addIncome(Income income){
+        listIncome.add(income);
     }
 
     public void writeToCsv()
@@ -91,9 +104,25 @@ public class CostModel {
             for (Saving i : this.getListSaving()){
                 aus.write(i.getSavingBack(';'));
             }
+            for (Income i : this.getListIncome()){
+                aus.write(i.getIncomeBack(';'));
+            }
             aus.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public double calculateLeftToSpend() {
+        double totalIncome = 0;
+        //System.out.println("hi");
+//        for (Income i : model.getListIncome()) {
+//            System.out.println("hi" + i.getActual());
+//            totalIncome += Double.parseDouble(i.getActual());
+//        }
+        for (Income i : getListIncome()) {
+            System.out.println("hi" + i.getActual());
+            totalIncome += Double.parseDouble(i.getActual());
+        }
+        return totalIncome;
     }
 }
