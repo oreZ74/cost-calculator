@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 public class CostModel {
 
-    private ArrayList <Bill> listBill = new ArrayList<>();
-    private ArrayList <Debt> listDebt= new ArrayList<>();
-    private ArrayList <Expense> listExpense= new ArrayList<>();
-    private ArrayList <Saving> listSaving= new ArrayList<>();
-    private ArrayList <Income> listIncome= new ArrayList<>();
+    private  ArrayList <Bill> listBill = new ArrayList<>();
+    private  ArrayList <Debt> listDebt= new ArrayList<>();
+    private  ArrayList <Expense> listExpense= new ArrayList<>();
+    private  ArrayList <Saving> listSaving= new ArrayList<>();
+    private  ArrayList <Income> listIncome= new ArrayList<>();
 
 
     public CostModel() {
@@ -112,17 +112,17 @@ public class CostModel {
             e.printStackTrace();
         }
     }
-    public double calculateLeftToSpend() {
-        double totalIncome = 0;
-        //System.out.println("hi");
-//        for (Income i : model.getListIncome()) {
+//    public double calculateLeftToSpend() {
+//        double totalIncome = 0;
+//        //System.out.println("hi");
+////        for (Income i : model.getListIncome()) {
+////            System.out.println("hi" + i.getActual());
+////            totalIncome += Double.parseDouble(i.getActual());
+////        }
+//        for (Income i : getListIncome()) {
 //            System.out.println("hi" + i.getActual());
 //            totalIncome += Double.parseDouble(i.getActual());
 //        }
-        for (Income i : getListIncome()) {
-            System.out.println("hi" + i.getActual());
-            totalIncome += Double.parseDouble(i.getActual());
-        }
-        return totalIncome;
-    }
+//        return totalIncome;
+//    }
 }

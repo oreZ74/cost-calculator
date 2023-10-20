@@ -13,11 +13,14 @@ import kosten_app.model.table.saving.Saving;
 public class CostController {
     private CostView view = null;
     private CostModel model = null;
-
+    private double LTS;
     public CostController(Stage stage) {
         this.model = new CostModel();
         this.view = new CostView(this, stage, model);
         extractData();
+        System.out.println(model.getListIncome());
+        LTS = calculateLeftToSpend();
+        System.out.println("constructor" + LTS);
     }
 
     public void extractData(){
@@ -60,9 +63,9 @@ public class CostController {
                 this.model.addIncome(new Income(
                         i.getName(),
                         i.getPayday(),
-                        i.getExpected(),
-                        i.getActual()
-                ));
+                        i.getActual(),
+                        i.getExpected()
+                        ));
             }
         }
         catch(Exception e){
@@ -70,26 +73,30 @@ public class CostController {
         }
     }
     public void saveData(){
+        System.out.println(model.getListIncome());
         extractData();
         model.writeToCsv();
         view.showInformationWindow("Your data has been saved!");
     }
 
-//    public double calculateLeftToSpend(){
-//        double totalIncome = 0;
-//        //System.out.println("hi");
-////        for (Income i : model.getListIncome()) {
-////            System.out.println("hi" + i.getActual());
-////            totalIncome += Double.parseDouble(i.getActual());
-////        }
+    public double calculateLeftToSpend(){
+        double totalIncome = 0;
+        System.out.println("outside " + model.getListIncome());
+        //for (Income i : model.getListIncome()) {
+        for (Income i : view.getIncome()) {
+            System.out.println("hi" + i.getActual());
+            totalIncome += Double.parseDouble(" "+i.getActual());
+            System.out.println(i.getActual());
+        }
+        view.totalIncome = totalIncome;
 //        for (Income i : this.view.getIncome()) {
 //            System.out.println("hi" + i.getActual());
 //            totalIncome += Double.parseDouble(i.getActual());
 //        }
-//
-//
-//        return totalIncome;
-//    }
+
+
+        return totalIncome;
+    }
 
     double calculateTotalIncome(){
         return 0;
@@ -101,5 +108,14 @@ public class CostController {
 
     double calculateLeftBudget(){
         return 0;
+    }
+
+
+    public double getLTS() {
+        return LTS;
+    }
+
+    public void setLTS(double LTS) {
+        this.LTS = LTS;
     }
 }

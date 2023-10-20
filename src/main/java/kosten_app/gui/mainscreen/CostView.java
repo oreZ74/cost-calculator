@@ -156,13 +156,12 @@ public class CostView {
         vTableBottom.setPrefSize(500,600);
 
         s1.setContent(hTableBottom);
-        this.control = control;
-        this.model = model;
         this.stage = stage;
+        this.model = model;
+        this.control = control;
         setStage(stage, compOrder);
         this.initKomponenten();
         this.initListener();
-
     }
 
 
@@ -183,7 +182,6 @@ public class CostView {
 
         hTableBottom.setSpacing(20);
 
-        totalIncome = model.calculateLeftToSpend();
         // Table
         billTable.getTable().getColumns().addAll(billTable.getName_column(), billTable.getDue_column(), billTable.getBudget_column(), billTable.getActual_column(), billTable.getDifference_column());
         expenseTable.getTable().getColumns().addAll(expenseTable.getName_column(), expenseTable.getBudget_column(), expenseTable.getActual_column(), expenseTable.getDifference_column());
@@ -304,6 +302,9 @@ public class CostView {
 //        });
 //        t.start();
         billTable.getTable().setTableMenuButtonVisible(true);
+        totalIncome = control.getLTS();
+        System.out.println("init" + control.getLTS());
+        totalIncome = control.getLTS();
     }
 
     private void initListener(){
