@@ -1,6 +1,7 @@
 package kosten_app.gui.mainscreen;
 
 
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import kosten_app.model.CostModel;
 import kosten_app.model.table.bill.Bill;
@@ -13,14 +14,11 @@ import kosten_app.model.table.saving.Saving;
 public class CostController {
     private CostView view = null;
     private CostModel model = null;
-    private double LTS;
     public CostController(Stage stage) {
         this.model = new CostModel();
         this.view = new CostView(this, stage, model);
         extractData();
         System.out.println(model.getListIncome());
-        LTS = calculateLeftToSpend();
-        System.out.println("constructor" + LTS);
     }
 
     public void extractData(){
@@ -79,16 +77,16 @@ public class CostController {
         view.showInformationWindow("Your data has been saved!");
     }
 
-    public double calculateLeftToSpend(){
+    public double calculateLeftToSpend(ObservableList<Income> income){
         double totalIncome = 0;
         System.out.println("outside " + model.getListIncome());
         //for (Income i : model.getListIncome()) {
-        for (Income i : view.getIncome()) {
+        for (Income i : income) {
             System.out.println("hi" + i.getActual());
             totalIncome += Double.parseDouble(" "+i.getActual());
             System.out.println(i.getActual());
         }
-        view.totalIncome = totalIncome;
+
 //        for (Income i : this.view.getIncome()) {
 //            System.out.println("hi" + i.getActual());
 //            totalIncome += Double.parseDouble(i.getActual());
@@ -108,14 +106,5 @@ public class CostController {
 
     double calculateLeftBudget(){
         return 0;
-    }
-
-
-    public double getLTS() {
-        return LTS;
-    }
-
-    public void setLTS(double LTS) {
-        this.LTS = LTS;
     }
 }

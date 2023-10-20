@@ -123,7 +123,10 @@ public class CostView {
     private StackPane stpTableExpenseBot    = new StackPane(expenseTableBot, new Text("hallo"));
     private StackPane stpTableSavingBot     = new StackPane(savingTableBot, new Text("hallo"));
     private StackPane stpTableDebtBot       = new StackPane(debtTableBot, new Text("hallo"));
-    private StackPane stpTableIncomeBot     = new StackPane(debtTableBot, new Text("TOTAL INCOME: " + totalIncome));
+    //private StackPane stpTableIncomeBot     = new StackPane(debtTableBot, new Text"TOTAL INCOME: " + totalIncome));
+    private Text tableIncomeBotText=  new Text();
+    private StackPane stpTableIncomeBot     = new StackPane(debtTableBot,tableIncomeBotText);
+
 
     // Merging tables to one group
     private VBox billTableGui               = new VBox(stpTableBillTop,billTable.getTable(),stpTableBillBot);
@@ -302,9 +305,9 @@ public class CostView {
 //        });
 //        t.start();
         billTable.getTable().setTableMenuButtonVisible(true);
-        totalIncome = control.getLTS();
-        System.out.println("init" + control.getLTS());
-        totalIncome = control.getLTS();
+        totalIncome = control.calculateLeftToSpend(getIncomeList());
+        System.out.println("init" + totalIncome);
+        tableIncomeBotText.setText("TOTAL INCOME:            " + totalIncome);
     }
 
     private void initListener(){
