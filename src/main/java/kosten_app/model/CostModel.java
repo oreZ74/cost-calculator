@@ -112,17 +112,4 @@ public class CostModel {
             e.printStackTrace();
         }
     }
-//    public double calculateLeftToSpend() {
-//        double totalIncome = 0;
-//        //System.out.println("hi");
-////        for (Income i : model.getListIncome()) {
-////            System.out.println("hi" + i.getActual());
-////            totalIncome += Double.parseDouble(i.getActual());
-////        }
-//        for (Income i : getListIncome()) {
-//            System.out.println("hi" + i.getActual());
-//            totalIncome += Double.parseDouble(i.getActual());
-//        }
-//        return totalIncome;
-//    }
 }

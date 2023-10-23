@@ -29,7 +29,7 @@
 
 /* grid color */
 .table-view .table-cell{
-    -fx-border-color: transparent;
+    -fx-border-color: black;
     -fx-padding: 2 0 2 10px;
     -fx-alignment: center ;
 
