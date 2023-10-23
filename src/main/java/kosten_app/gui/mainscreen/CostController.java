@@ -23,7 +23,9 @@ public class CostController {
 
     public CostController(Stage stage) {
         this.model = new CostModel();
+        System.out.println("hi");
         this.view = new CostView(this, stage, model);
+        System.out.println("hi 2");
         extractData();
     }
 
@@ -94,7 +96,7 @@ public class CostController {
 
     // [0] = expected || [1] = actual
     public double [] calculateTotalOfIncome(ObservableList<Income> income){
-        System.out.println(view.getBillList().getClass());
+
         double [] total = new double[2];
         int counter= 0;
         for (Income i : income) {
