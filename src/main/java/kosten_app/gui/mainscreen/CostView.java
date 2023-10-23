@@ -40,6 +40,7 @@ public class CostView {
 
     private CostController control;
     private CostModel model;
+<<<<<<< Updated upstream
 
     public CostView(CostController control, Stage stage, CostModel model) {
 
@@ -92,9 +93,27 @@ public class CostView {
         //inline code
         //ocrButton.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 
-    }
+=======
+    // Lists //
+    public String a = "aaa";
+    private VBox compOrder                  = new VBox(new Text("Hi"));
 
+    public CostView(CostController control, Stage stage, CostModel model) {
+        Scene scene = new Scene(compOrder,1950, 1200);
+        this.control = control;
+        this.model = model;
+        stage.setScene(scene);
+        stage.setTitle("Monatliche Kostenberechnung");
+        stage.show();
+        this.initKomponenten();
+        this.initListener();
+    }
+    private void initKomponenten(){
+        this.control.hallo();
+>>>>>>> Stashed changes
+    }
     private void initListener(){
+<<<<<<< Updated upstream
 
         fixedExpensesField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -151,4 +170,7 @@ public class CostView {
             setStage(stage, border);
         }
     }
+=======
+    }
+>>>>>>> Stashed changes
 }
