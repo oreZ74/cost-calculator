@@ -25,8 +25,10 @@ public class CostController {
         this.model = new CostModel();
         System.out.println("hi");
         this.view = new CostView(this, stage, model);
+        view.init();
         System.out.println("hi 2");
         extractData();
+
     }
 
     public void extractData(){
@@ -85,6 +87,7 @@ public class CostController {
         model.writeToCsv();
         view.showInformationWindow("Your data has been saved!");
     }
+
     // Calulating the total of one row
 //    public double calculateActualOfIncome(ObservableList<Income> income){
 //        double totalIncomeActual = 0;
@@ -96,7 +99,8 @@ public class CostController {
 
     // [0] = expected || [1] = actual
     public double [] calculateTotalOfIncome(ObservableList<Income> income){
-
+        //System.out.println(view.getBillList().get(0).getName());
+        //System.out.println(model.getListBill().get(0).getName());
         double [] total = new double[2];
         int counter= 0;
         for (Income i : income) {

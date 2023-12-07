@@ -100,9 +100,9 @@ public class CostView {
 
     // Charts //
     int [] roundedOverview ;
-    private ObservableList<PieChart.Data> pieChartData = getPieChart();
+   // private ObservableList<PieChart.Data> pieChartData = getPieChart();
 
-    private final PieChart chart = new PieChart(pieChartData);
+    private final PieChart chart = new PieChart();
 
     // --Text-- //
     private Text cardTextSpend              = new Text("LEFT TO SPEND");
@@ -199,14 +199,19 @@ public class CostView {
 
 
     public CostView(CostController control, Stage stage, CostModel model) {
+
         s1.setContent(hTableBottom);
         this.stage = stage;
         this.model = model;
         this.control = control;
         setStage(stage, compOrder);
+
+    }
+    public void init(){
         this.initKomponenten();
         this.initListener();
     }
+
 
 
     void setStage(Stage stage, Pane pane){
@@ -219,9 +224,10 @@ public class CostView {
         stage.setTitle("Monatliche Kostenberechnung");
         //stage.setResizable(true);
         stage.show();
+
     }
 
-    private void initKomponenten(){
+    public void initKomponenten(){
         //roundedOverview =  control.PiechartOverview();
         hTableBottom.setSpacing(20);
         control.setBillList(getBillList());
@@ -415,11 +421,23 @@ public class CostView {
 
         hBoxIncome.setMargin(tableIncomeBotExpected,new Insets(0,70,0,180));
         //tableIncomeBotText.setTextAlignment(TextAlignment.LEFT);
-        chart.setTitle("Spending Overview");
 
+        chart.setTitle("Spending Overview");
+        chartOrder.getChildren().add(chart);
     }
 
-    private void initListener(){
+
+
+//    ObservableList<PieChart.Data> pieChartData =
+//            FXCollections.observableArrayList(
+//                    new PieChart.Data("Bills", Math.round(control.calculateTotalOfBill(getBillList())[1] / control.totalExpense() * 100)),
+//                    new PieChart.Data("Debt", Math.round(control.calculateTotalOfDebt(getDebtList())[1] / control.totalExpense() * 100)),
+//                    new PieChart.Data("Expenses", Math.round(control.calculateTotalOfExpense(getExpenseList())[1] / control.totalExpense() * 100)),
+//                    new PieChart.Data("Savings", Math.round(control.calculateTotalOfSaving(getSavingList())[1] / control.totalExpense() * 100)));
+
+
+
+    public void initListener(){
 
         btnSaveInput.setOnAction((ActionEvent e)->
         {
@@ -433,9 +451,7 @@ public class CostView {
         if(billList == null) {
             billList = FXCollections.observableArrayList();
             billList.add(new Bill("Bill", "30.02", "150", "120", "30"));
-
         }
-
         if( billList.get(zaehler).getName() != null){
         billTable.getTable().getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 System.out.println("+");
@@ -479,8 +495,6 @@ public class CostView {
     }
 
     public ObservableList <PieChart.Data> getPieChart() {
-
-
         ObservableList<PieChart.Data> pie;
         pie = FXCollections.observableArrayList(
                 new PieChart.Data("Grapefruit", 13),
